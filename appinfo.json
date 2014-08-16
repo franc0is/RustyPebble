@@ -1,0 +1,17 @@
+{
+  "uuid": "378d5549-f876-4733-8c77-76bf80b8ec0f",
+  "shortName": "Rusty",
+  "longName": "Rusty",
+  "companyName": "Pebble",
+  "versionCode": 1,
+  "versionLabel": "1.0.0",
+  "watchapp": {
+    "watchface": false
+  },
+  "appKeys": {
+    "dummy": 0
+  },
+  "resources": {
+    "media": []
+  }
+}
