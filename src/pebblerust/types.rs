@@ -1,4 +1,4 @@
-pub type WindowHandler = extern fn(*Window);
+pub type WindowHandler = extern fn(*mut Window);
 
 pub struct Window;
 pub struct Layer;
@@ -27,6 +27,6 @@ pub struct WindowHandlers {
   pub unload: WindowHandler
 }
 
-pub type ClickRecognizerRef = *ClickRecognizer;
+pub type ClickRecognizerRef = *mut ClickRecognizer;
 
 

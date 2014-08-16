@@ -10,31 +10,25 @@ pub enum AppLogLevel {
   AppLogLevelDebugVerbose = 255,
 }
 
-pub fn null<T>() -> T {
-  unsafe {
-    transmute(0)
-  }
-}
-
 pub fn app_event_loop() {
   unsafe {
     c::app_event_loop();
   }
 }
 
-pub fn window_create() -> *Window {
+pub fn window_create() -> *mut Window {
   unsafe {
     c::window_create()
   }
 }
 
-pub fn window_set_window_handlers(window: *Window, handlers: WindowHandlers) {
+pub fn window_set_window_handlers(window: *mut Window, handlers: WindowHandlers) {
   unsafe {
     c::window_set_window_handlers(window, handlers);
   }
 }
 
-pub fn window_stack_push(window: *Window, animated: bool) {
+pub fn window_stack_push(window: *mut Window, animated: bool) {
   unsafe {
     c::window_stack_push(window, animated);
   }
@@ -42,65 +36,65 @@ pub fn window_stack_push(window: *Window, animated: bool) {
 
 pub fn app_log(level: AppLogLevel, msg: &str) {
   unsafe {
-    c::app_log(level as u8, &"rusty"[0], 0, &msg[0]);
+    c::app_log(level as u8, transmute("rusty"), 0, transmute(msg));
   }
 }
 
-pub fn window_single_click_subscribe<T>(button: u8, subscriber: extern fn(ClickRecognizerRef, *T)) {
+pub fn window_single_click_subscribe<T>(button: u8, subscriber: extern fn(ClickRecognizerRef, *mut T)) {
   unsafe {
-    let subscriber_ptr: extern fn(ClickRecognizerRef, *u8) = transmute(subscriber);
+    let subscriber_ptr: extern fn(ClickRecognizerRef, *mut u8) = transmute(subscriber);
     c::window_single_click_subscribe(button, subscriber_ptr);
   }
 }
 
-pub fn window_set_click_config_provider<T>(window: *Window, provider: extern fn(*T)) {
+pub fn window_set_click_config_provider<T>(window: *mut Window, provider: extern fn(*mut T)) {
   unsafe {
-    let provider_ptr: extern fn(*u8) = transmute(provider);
+    let provider_ptr: extern fn(*mut u8) = transmute(provider);
     c::window_set_click_config_provider(window, provider_ptr);
   }
 }
 
-pub fn window_get_root_layer(window: *Window) -> *Layer {
+pub fn window_get_root_layer(window: *mut Window) -> *mut Layer {
   unsafe {
     c::window_get_root_layer(window)
   }
 }
 
-pub fn layer_get_bounds(layer: *Layer) -> GRect {
+pub fn layer_get_bounds(layer: *mut Layer) -> GRect {
   unsafe {
     c::layer_get_bounds(layer)
   }
 }
 
-pub fn text_layer_create(frame: GRect) -> *TextLayer {
+pub fn text_layer_create(frame: GRect) -> *mut TextLayer {
   unsafe {
     c::text_layer_create(frame)
   }
 }
 
-pub fn text_layer_set_text(layer: *TextLayer, text: &str) {
+pub fn text_layer_set_text(layer: *mut TextLayer, text: &str) {
   unsafe {
     c::text_layer_set_text(layer, text);
   }
 }
 
-pub fn layer_add_child(parent: *Layer, child: *Layer) {
+pub fn layer_add_child(parent: *mut Layer, child: *mut Layer) {
   unsafe {
     c::layer_add_child(parent, child);
   }
 }
 
-pub fn text_layer_get_layer(text_layer: *TextLayer) -> *Layer {
+pub fn text_layer_get_layer(text_layer: *mut TextLayer) -> *mut Layer {
   unsafe {
     c::text_layer_get_layer(text_layer)
   }
 }
 
-pub fn window_set_click_config_provider_with_context<T>(window: *Window,
-    provider: extern fn(*T), context: *T) {
+pub fn window_set_click_config_provider_with_context<T>(window: *mut Window,
+    provider: extern fn(*mut T), context: *mut T) {
   unsafe {
-    let context_ptr: *u8 = transmute(context);
-    let fn_ptr: extern fn(*u8) = transmute(provider);
+    let context_ptr: *mut u8 = transmute(context);
+    let fn_ptr: extern fn(*mut u8) = transmute(provider);
     c::window_set_click_config_provider_with_context(window, fn_ptr, context_ptr);
   }
 }

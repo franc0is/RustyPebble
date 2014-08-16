@@ -12,6 +12,13 @@
     "dummy": 0
   },
   "resources": {
-    "media": []
+    "media": [
+        {
+          "type": "png",
+          "name": "IMAGE_RUST_LOGO",
+          "file": "images/rust-logo.png",
+          "menuIcon": true
+        }
+      ]
   }
 }
