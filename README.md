@@ -1,9 +1,9 @@
 RustyPebble
 ===========
 
-This is a proof of concept Pebble application written is Rust.
+This is a proof of concept Pebble application written in [Rust|http://rust-lang.org]).
 
-It does not yet make much use of Rust's core library (need to cross compile it first). Instead, it relies on the FFI and implements a few required language items.
+It does not yet make use of Rust's core library (need to cross compile it first). Instead, it relies on the FFI and implements a few required language items.
 
 rusty.rs contains the app itself. pebblerust contains a rust version of the pebble library.
 
