@@ -34,11 +34,13 @@ pub fn window_stack_push(window: *mut Window, animated: bool) {
   }
 }
 
-//pub fn app_log(level: AppLogLevel, msg: &str) {
-//  unsafe {
-//    c::app_log(level as u8, &"rusty"[0], 0, &msg[0]);
-//  }
-//}
+pub fn app_log(level: AppLogLevel, msg: &str) {
+  unsafe {
+    let (filename, _): (*const u8, uint) = transmute("rusty");
+    let (message, _): (*const u8, uint) = transmute(msg);
+    c::app_log(level as u8, filename, 0, message);
+  }
+}
 
 pub fn window_single_click_subscribe<T>(button: u8, subscriber: extern fn(ClickRecognizerRef, *mut T)) {
   unsafe {
