@@ -4,10 +4,10 @@
 #![feature(lang_items)]
 #![feature(intrinsics)]
 
+extern crate core;
 
 use pebblerust::lib::*;
 use pebblerust::types::*;
-
 
 mod pebblerust {
   pub mod lib;

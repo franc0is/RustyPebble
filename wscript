@@ -11,9 +11,23 @@ from waflib.TaskGen import extension
 top = '.'
 out = 'build'
 
-TaskGen.declare_chain(name='rustc', rule='${RUSTC} --target arm-linux-eabi ${SRC} --emit=ir -A dead-code -o ${TGT}', ext_in='.rs', ext_out='.ll',)
-TaskGen.declare_chain(name='llc', rule='${LLC} -mtriple=arm-none-eabi -relocation-model=pic -march=thumb -mattr=+thumb2 -mcpu=cortex-m3 --float-abi=soft --asm-verbose=false ${SRC} -o ${TGT}', ext_in='.ll', ext_out='.s',)
-TaskGen.declare_chain(name='as', rule='${AS} ${ASFLAGS} -c ${SRC} -o ${TGT}', ext_in='.s',  ext_out='.o',)
+TaskGen.declare_chain(
+    name='rustc',
+    rule='${RUSTC} -L ../lib/ --target arm-linux-eabi ${SRC} --emit=ir -A dead-code -o ${TGT}',
+    ext_in='.rs',
+    ext_out='.ll',)
+
+TaskGen.declare_chain(
+    name='llc',
+    rule='${LLC} -mtriple=arm-none-eabi -relocation-model=pic -march=thumb -mattr=+thumb2 -mcpu=cortex-m3 --float-abi=soft --asm-verbose=false ${SRC} -o ${TGT}',
+    ext_in='.ll',
+    ext_out='.s',)
+
+TaskGen.declare_chain(
+    name='as',
+    rule='${AS} ${ASFLAGS} -c ${SRC} -o ${TGT}',
+    ext_in='.s',
+    ext_out='.o',)
 
 def options(ctx):
     ctx.load('pebble_sdk')
