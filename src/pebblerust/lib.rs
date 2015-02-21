@@ -3,11 +3,11 @@ use pebblerust::types::*;
 use pebblerust::c;
 
 pub enum AppLogLevel {
-  AppLogLevelError = 1,
-  AppLogLevelWarning = 50,
-  AppLogLevelInfo = 100,
-  AppLogLevelDebug = 200,
-  AppLogLevelDebugVerbose = 255,
+  Error = 1,
+  Warning = 50,
+  Info = 100,
+  Debug = 200,
+  DebugVerbose = 255,
 }
 
 pub fn app_event_loop() {

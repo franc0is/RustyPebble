@@ -1,8 +1,9 @@
-use pebblerust::types::*; 
+use pebblerust::types::*;
 extern {
   pub fn app_event_loop();
   pub fn window_create() -> *mut Window;
   pub fn window_stack_push(window: *mut Window, animated: bool);
+  pub fn window_stack_pop_all();
   pub fn app_log(level: u8, filename: *const u8, line_num: u32, msg: *const u8);
   pub fn window_set_click_config_provider(window: *mut Window, provider: extern fn(*mut u8));
   pub fn window_set_click_config_provider_with_context(window: *mut Window, provider: extern fn(*mut u8), context: *mut u8);
