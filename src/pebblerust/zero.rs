@@ -14,7 +14,7 @@
 #![feature(intrinsics)]
 
 extern { fn puts(s: *const u8); }
-extern "rust-intrinsic" { fn transmute<T, U>(t: T) -> U; }
+extern "rust-intrinsic" { pub fn transmute<T, U>(t: T) -> U; }
 
 #[lang = "stack_exhausted"] extern fn stack_exhausted() {}
 #[lang = "eh_personality"] extern fn eh_personality() {}
