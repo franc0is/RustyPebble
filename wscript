@@ -14,7 +14,7 @@ out = 'build'
 
 TaskGen.declare_chain(
     name='rustc',
-    rule='${RUSTC} -L ../lib/ -C target-cpu=cortex-m3 --target thumbv7m-none-eabi ${SRC} --emit=llvm-ir -A dead-code -o ${TGT}',
+    rule='${RUSTC} -L ../lib/ -C target-cpu=cortex-m3 --target thumbv7m-none-eabi ${SRC} --emit=llvm-ir -o ${TGT}',
     ext_in='.rs',
     ext_out='.ll',)
 
@@ -38,7 +38,7 @@ def configure(ctx):
 
 def build(ctx):
     ctx.env.RUSTC = 'rustc'
-    ctx.env.LLC = '/usr/local/opt/llvm/bin/llc'
+    ctx.env.LLC = '../lib/llvm/Debug+Asserts/bin/llc'
 
     shutil.copy2('thumbv7m-none-eabi.json', out)
 
